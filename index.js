@@ -31,10 +31,22 @@ console.log('example task:', processFirstItem(['foo','bar'],function(str){return
   
   1. What is the difference between counter1 and counter2?
   
+  counter1 has a nested function that altars the variable 'count' contained within the function 'counterMaker', this version of the count variable is only accessible from scopes within the function, it cannot be changed or referenced by outside sources.
+  counter2 is a single function that altars a variable declared in the global scope, this variable can be referenced and edited from anywhere in the program. 
+  
   2. Which of the two uses a closure? How can you tell?
   
+  Both of these are examples of closure, in counter1 the nested function 'Counter' executes code that references a variable outside of itself. The variable 'count' is declared in the 'counterMaker'function, which is essentially one scope level up from the actual counter1 function.
+
+  counter2 is basically doing the same thing, it's accessing a variable that has been declared outside of its scope, it's little contained block, only in this scenario the variable it's referencing is declared in the global scope.
+
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+
+     If you want to keep your count variable restricted to only be referenced or edited by code contained within the scope of that specific function, you would use counter1, if you want multiple functions to reference and possibly edit your count variable you would use counter2.
+     let say you are creating a game, you have two players who each build up their own points and you want to see a combined total of their points, lets say it's a cooperative game and once both players reach a combined score of 10 you win. 
+     counter1 has a private variable that can keep track of it's own score, only counter1 can change it's own count variable, so this setup would be ideal for creating the individual player scores as they are contained within themselves and not accessible outside of their own scope.
+     counter2 could be altared by multiple sources, so if I make a function for player1 and player2, they can both make changes to the count variable as it is stored in the global scope, so they both have access to it. so player1 gains a point, it increases count by 1, count now = 1, player 2 then gets a point, it increases the same variable by 1 so now count = 2, you cannot do that with counter1 because player2 wouldn't be able to reach inside of player1 to access that counter.
 */
 
 // counter1 code
@@ -64,9 +76,10 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+    return Math.floor(Math.random() * 3);
 }
+console.log(inning());
 
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
