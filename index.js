@@ -96,9 +96,35 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*Code Here*/){
-  /*Code Here*/
+function finalScore(callback, inn){
+  const obj = {};
+
+  let home = 0;
+  let away = 0;
+
+ function homeCounter() {
+  home += callback();
+  return home;
+ }
+
+ function awayCounter() {
+  away += callback();
+  return away;
+ }
+
+ for(let i = 0; i < inn; i++) {
+  homeCounter();
+  awayCounter();
+ }
+ 
+ obj.Home = home;
+ obj.Away = away;
+
+ return obj;
 }
+  
+  
+console.log(finalScore(inning, 9));
 
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
@@ -114,11 +140,16 @@ For example: invoking getInningScore(inning) might return this object:
   */
 
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(callback) {
+  const obj = {};
 
+  obj.Home = callback();
+  obj.Away = callback();
+
+  return obj;
 }
 
+console.log(getInningScore(inning));
 
 /* STRETCH: ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
